@@ -1,0 +1,891 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Inkora — Premium Leather Journals</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1714;
+    --cream: #f5f0e8;
+    --warm: #e8dfd0;
+    --leather: #8b6344;
+    --leather-light: #c4a882;
+    --leather-dark: #5c3d24;
+    --muted: #7a7169;
+    --border: rgba(26,23,20,0.12);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .nav-cta:hover { background: var(--ink); color: var(--cream); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+  }
+
+  .hero-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--leather);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--leather);
+  }
+
+  .hero-sub {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 380px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex; align-items: center; gap: 2rem;
+  }
+
+  .btn-primary {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.9rem 2.5rem;
+    background: var(--ink);
+    color: var(--cream);
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--leather-dark); transform: translateY(-1px); }
+
+  .btn-ghost {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .btn-ghost:hover { color: var(--leather); border-color: var(--leather); }
+
+  .hero-right {
+    background: var(--warm);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-visual {
+    width: 320px; height: 420px;
+    position: relative;
+  }
+
+  /* Illustrated journal */
+  .journal-cover {
+    width: 260px; height: 340px;
+    background: var(--leather);
+    border-radius: 2px 8px 8px 2px;
+    position: absolute;
+    top: 40px; left: 30px;
+    box-shadow: 8px 12px 40px rgba(26,23,20,0.25), inset -3px 0 8px rgba(0,0,0,0.15);
+  }
+
+  .journal-spine {
+    width: 20px; height: 340px;
+    background: var(--leather-dark);
+    border-radius: 2px 0 0 2px;
+    position: absolute; top: 40px; left: 10px;
+  }
+
+  .journal-texture {
+    position: absolute;
+    width: 240px; height: 320px;
+    top: 50px; left: 40px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 1px 6px 6px 1px;
+  }
+
+  .journal-band {
+    position: absolute;
+    width: 4px; height: 340px;
+    background: var(--ink);
+    top: 40px; right: 64px;
+    opacity: 0.7;
+  }
+
+  .journal-title-text {
+    position: absolute;
+    top: 160px; left: 55px;
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.7);
+    letter-spacing: 0.12em;
+    font-style: italic;
+  }
+
+  .journal-ornament {
+    position: absolute;
+    top: 145px; left: 90px;
+    width: 100px; height: 1px;
+    background: rgba(245,240,232,0.25);
+  }
+
+  .journal-ornament::after {
+    content: '';
+    position: absolute;
+    top: 20px; left: 0;
+    width: 100px; height: 1px;
+    background: rgba(245,240,232,0.25);
+  }
+
+  .journal-pages {
+    position: absolute;
+    width: 248px; height: 328px;
+    top: 44px; left: 52px;
+    background: repeating-linear-gradient(
+      to right,
+      #e8e0d0 0px,
+      #e8e0d0 1px,
+      #ede5d5 1px,
+      #ede5d5 3px
+    );
+    border-radius: 0 6px 6px 0;
+    z-index: -1;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 60px; right: 40px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 1px solid var(--leather-light);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--cream);
+  }
+
+  .hero-badge span:first-child {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--leather);
+    font-style: italic;
+  }
+
+  .hero-badge span:last-child {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* MARQUEE */
+  .marquee-strip {
+    background: var(--ink);
+    padding: 0.85rem 0;
+    overflow: hidden;
+  }
+
+  .marquee-inner {
+    display: flex; gap: 4rem;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-inner span {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--leather-light);
+    flex-shrink: 0;
+  }
+
+  .marquee-dot {
+    color: var(--leather) !important;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* PRODUCTS */
+  .section-products {
+    padding: 7rem 6rem;
+  }
+
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--leather);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .section-title em { font-style: italic; color: var(--leather); }
+
+  .view-all {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.3s;
+    white-space: nowrap;
+    margin-bottom: 0.4rem;
+  }
+
+  .view-all:hover { color: var(--ink); }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .product-card {
+    cursor: pointer;
+    group: true;
+  }
+
+  .product-image {
+    aspect-ratio: 3/4;
+    background: var(--warm);
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .product-image svg {
+    transition: transform 0.5s ease;
+  }
+
+  .product-card:hover .product-image svg {
+    transform: scale(1.04);
+  }
+
+  .product-tag {
+    position: absolute; top: 1rem; left: 1rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .product-name {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .product-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .product-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .product-price {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--leather-dark);
+  }
+
+  .product-add {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: none;
+    border: 1px solid var(--ink);
+    padding: 0.45rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    font-family: var(--sans);
+  }
+
+  .product-add:hover { background: var(--ink); color: var(--cream); }
+
+  /* ABOUT */
+  .section-about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+    border-top: 1px solid var(--border);
+  }
+
+  .about-visual {
+    background: var(--leather);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 5rem;
+  }
+
+  .about-visual-inner {
+    text-align: center;
+  }
+
+  .about-monogram {
+    font-family: var(--serif);
+    font-size: 9rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.15);
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+
+  .about-circle {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,240,232,0.25);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2;
+  }
+
+  .about-circle-inner {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,240,232,0.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .about-icon-text {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: rgba(245,240,232,0.6);
+    font-style: italic;
+    letter-spacing: 0.08em;
+  }
+
+  .about-stats {
+    display: flex; gap: 3rem; margin-top: 3rem;
+    position: relative; z-index: 2;
+  }
+
+  .stat-val {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.85);
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-top: 0.25rem;
+  }
+
+  .about-content {
+    padding: 6rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .about-content p {
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-content p strong {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .about-quote {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--leather);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--leather-light);
+  }
+
+  /* FEATURE STRIP */
+  .feature-strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 6rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .feature-item {
+    padding-right: 2rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .feature-item:last-child { border-right: none; }
+
+  .feature-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--leather-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-title {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 4rem 6rem 2rem;
+    color: rgba(245,240,232,0.5);
+  }
+
+  .footer-top {
+    display: flex; justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.85);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: rgba(245,240,232,0.3);
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  .footer-links {
+    display: flex; gap: 4rem;
+  }
+
+  .footer-col h4 {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.55);
+    text-decoration: none;
+    margin-bottom: 0.6rem;
+    transition: color 0.3s;
+    font-weight: 300;
+  }
+
+  .footer-col a:hover { color: rgba(245,240,232,0.9); }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-label { animation: fadeUp 0.7s ease both; }
+  .hero-title { animation: fadeUp 0.7s 0.15s ease both; }
+  .hero-sub { animation: fadeUp 0.7s 0.3s ease both; }
+  .hero-actions { animation: fadeUp 0.7s 0.45s ease both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 6rem 2rem 3rem; }
+    .hero-right { min-height: 55vw; }
+    .section-products { padding: 5rem 1.5rem; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    .section-about { grid-template-columns: 1fr; }
+    .about-content { padding: 3rem 2rem; }
+    .feature-strip { padding: 3rem 1.5rem; grid-template-columns: 1fr 1fr; }
+    footer { padding: 3rem 1.5rem 1.5rem; }
+    .footer-top { flex-direction: column; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Inkora</a>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#about">Craft</a></li>
+  </ul>
+  <a href="#products" class="nav-cta">Shop Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-label">Premium Leather Journals</p>
+    <h1 class="hero-title">Where <em>words</em><br>find their<br>home</h1>
+    <p class="hero-sub">Each Inkora journal is crafted from full-grain leather — a quiet, enduring companion for your thoughts, stories, and dreams.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Collection</a>
+      <a href="#about" class="btn-ghost">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="journal-pages"></div>
+      <div class="journal-spine"></div>
+      <div class="journal-cover">
+        <div class="journal-texture"></div>
+        <div class="journal-ornament"></div>
+        <div class="journal-title-text">Inkora</div>
+      </div>
+      <div class="journal-band"></div>
+    </div>
+    <div class="hero-badge">
+      <span>Handmade</span>
+      <span>Since 2020</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Full-Grain Leather</span><span class="marquee-dot">·</span>
+    <span>Hand-Stitched</span><span class="marquee-dot">·</span>
+    <span>Archival Paper</span><span class="marquee-dot">·</span>
+    <span>Lifetime Quality</span><span class="marquee-dot">·</span>
+    <span>Made with Intent</span><span class="marquee-dot">·</span>
+    <span>Full-Grain Leather</span><span class="marquee-dot">·</span>
+    <span>Hand-Stitched</span><span class="marquee-dot">·</span>
+    <span>Archival Paper</span><span class="marquee-dot">·</span>
+    <span>Lifetime Quality</span><span class="marquee-dot">·</span>
+    <span>Made with Intent</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section-products" id="products">
+  <div class="section-header">
+    <div>
+      <p class="section-label">The Collection</p>
+      <h2 class="section-title">Journals built to<br><em>outlast a lifetime</em></h2>
+    </div>
+    <a href="#" class="view-all">View All →</a>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Product 1 -->
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-tag">Bestseller</span>
+        <svg width="160" height="210" viewBox="0 0 160 210" fill="none">
+          <rect x="20" y="10" width="12" height="190" rx="2" fill="#5c3d24"/>
+          <rect x="30" y="10" width="110" height="190" rx="0 4 4 0" fill="#8b6344"/>
+          <rect x="33" y="13" width="104" height="184" rx="0 3 3 0" fill="none" stroke="rgba(245,240,232,0.12)" stroke-width="1"/>
+          <rect x="118" y="10" width="3" height="190" fill="#3d2010" opacity="0.6"/>
+          <text x="85" y="112" font-family="Georgia,serif" font-size="13" fill="rgba(245,240,232,0.55)" text-anchor="middle" font-style="italic">Classic</text>
+          <line x1="60" y1="97" x2="110" y2="97" stroke="rgba(245,240,232,0.2)" stroke-width="0.5"/>
+          <line x1="60" y1="125" x2="110" y2="125" stroke="rgba(245,240,232,0.2)" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <p class="product-name">The Classic</p>
+      <p class="product-desc">Tan full-grain leather · A5 · 240 archival pages</p>
+      <div class="product-footer">
+        <span class="product-price">RM 185</span>
+        <button class="product-add">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <div class="product-image">
+        <svg width="160" height="210" viewBox="0 0 160 210" fill="none">
+          <rect x="20" y="10" width="12" height="190" rx="2" fill="#1a1714"/>
+          <rect x="30" y="10" width="110" height="190" rx="0 4 4 0" fill="#2c2420"/>
+          <rect x="33" y="13" width="104" height="184" rx="0 3 3 0" fill="none" stroke="rgba(196,168,130,0.15)" stroke-width="1"/>
+          <rect x="118" y="10" width="3" height="190" fill="#0a0908" opacity="0.8"/>
+          <text x="85" y="112" font-family="Georgia,serif" font-size="13" fill="rgba(196,168,130,0.5)" text-anchor="middle" font-style="italic">Noir</text>
+          <line x1="60" y1="97" x2="110" y2="97" stroke="rgba(196,168,130,0.18)" stroke-width="0.5"/>
+          <line x1="60" y1="125" x2="110" y2="125" stroke="rgba(196,168,130,0.18)" stroke-width="0.5"/>
+          <circle cx="85" cy="165" r="6" fill="none" stroke="rgba(196,168,130,0.3)" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <p class="product-name">The Noir</p>
+      <p class="product-desc">Blackened leather · A5 · Lay-flat binding</p>
+      <div class="product-footer">
+        <span class="product-price">RM 210</span>
+        <button class="product-add">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <div class="product-image">
+        <svg width="160" height="210" viewBox="0 0 160 210" fill="none">
+          <rect x="20" y="10" width="12" height="190" rx="2" fill="#7a5c3c"/>
+          <rect x="30" y="10" width="110" height="190" rx="0 4 4 0" fill="#c4a882"/>
+          <rect x="33" y="13" width="104" height="184" rx="0 3 3 0" fill="none" stroke="rgba(26,23,20,0.1)" stroke-width="1"/>
+          <rect x="118" y="10" width="3" height="190" fill="#5c3d24" opacity="0.5"/>
+          <text x="85" y="108" font-family="Georgia,serif" font-size="12" fill="rgba(26,23,20,0.4)" text-anchor="middle" font-style="italic">The</text>
+          <text x="85" y="124" font-family="Georgia,serif" font-size="12" fill="rgba(26,23,20,0.4)" text-anchor="middle" font-style="italic">Journey</text>
+          <line x1="62" y1="96" x2="108" y2="96" stroke="rgba(26,23,20,0.15)" stroke-width="0.5"/>
+          <line x1="62" y1="132" x2="108" y2="132" stroke="rgba(26,23,20,0.15)" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <p class="product-name">The Journey</p>
+      <p class="product-desc">Caramel leather · Pocket size · Refillable</p>
+      <div class="product-footer">
+        <span class="product-price">RM 155</span>
+        <button class="product-add">Add to Bag</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="feature-strip">
+  <div class="feature-item">
+    <div class="feature-num">01</div>
+    <div class="feature-title">Full-Grain Leather</div>
+    <p class="feature-desc">The strongest, most durable layer of the hide. Develops a rich patina over years of use.</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-num">02</div>
+    <div class="feature-title">Archival Paper</div>
+    <p class="feature-desc">Acid-free, 120gsm pages. Fountain pen, marker, or watercolour — every medium is welcome.</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-num">03</div>
+    <div class="feature-title">Hand-Stitched</div>
+    <p class="feature-desc">Saddle-stitched with waxed linen thread. No glue. Meant to be opened flat, used fully.</p>
+  </div>
+  <div class="feature-item">
+    <div class="feature-num">04</div>
+    <div class="feature-title">Made to Order</div>
+    <p class="feature-desc">Each journal is handcrafted on request. Allow 5–7 days for your piece to be ready.</p>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section-about" id="about">
+  <div class="about-visual">
+    <div class="about-monogram">I</div>
+    <div class="about-visual-inner">
+      <div class="about-circle">
+        <div class="about-circle-inner">
+          <span class="about-icon-text">est. 2020</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div>
+          <div class="stat-val">2k+</div>
+          <div class="stat-label">Journals Made</div>
+        </div>
+        <div>
+          <div class="stat-val">40+</div>
+          <div class="stat-label">Countries</div>
+        </div>
+        <div>
+          <div class="stat-val">100%</div>
+          <div class="stat-label">Handcrafted</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title" style="margin-bottom:2rem;">Craft over <em>convenience</em></h2>
+    <blockquote class="about-quote">"A journal should age with you — not against you."</blockquote>
+    <p>Inkora began in a small workshop in Kuala Lumpur, born from the belief that the act of writing deserves a worthy vessel. Every journal we make starts as a single piece of <strong>ethically sourced leather</strong>, cut and shaped entirely by hand.</p>
+    <p>We don't rush. We don't mass-produce. We make things <strong>slowly, on purpose</strong> — because objects made with intention carry it forward into everything you write.</p>
+    <a href="#" class="btn-primary" style="align-self:flex-start; margin-top:1rem;">Read Our Story</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Inkora</div>
+      <div class="footer-tagline">Where words find their home.</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">All Journals</a>
+        <a href="#">New Arrivals</a>
+        <a href="#">Gift Sets</a>
+        <a href="#">Custom Orders</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">Our Story</a>
+        <a href="#">The Craft</a>
+        <a href="#">Sustainability</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">Shipping & Returns</a>
+        <a href="#">Care Guide</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Inkora. All rights reserved.</span>
+    <span>Kuala Lumpur, Malaysia</span>
+  </div>
+</footer>
+
+</body>
+</html>
